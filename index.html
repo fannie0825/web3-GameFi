@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Vanguard | Web3 Gaming Ecosystem</title>
+    <title>Nexus Vanguard | Web3 Gaming</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,13 +14,11 @@
             theme: {
                 extend: {
                     colors: {
-                        neon: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' }, // Cyberpunk Purple
-                        accent: { 400: '#2dd4bf', 500: '#14b8a6' }, // Teal
+                        neon: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' },
+                        accent: { 400: '#2dd4bf', 500: '#14b8a6' },
                         dark: { 800: '#1f2937', 900: '#111827', 950: '#030712' }
                     },
-                    fontFamily: {
-                        sans: ['Rajdhani', 'sans-serif'], // Futuristic font
-                    }
+                    fontFamily: { sans: ['Rajdhani', 'sans-serif'] }
                 }
             }
         }
@@ -30,9 +28,8 @@
         @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
         body { background-color: #030712; color: #f3f4f6; overflow-x: hidden; font-family: 'Rajdhani', sans-serif; }
         
-        /* Gaming UI Elements */
         .glass-panel { 
-            background: rgba(17, 24, 39, 0.7); 
+            background: rgba(17, 24, 39, 0.8); 
             backdrop-filter: blur(12px); 
             border: 1px solid rgba(168, 85, 247, 0.2); 
             box-shadow: 0 0 15px rgba(168, 85, 247, 0.05);
@@ -41,107 +38,80 @@
         .view-section { display: none; animation: fadeIn 0.3s ease-in-out; }
         .view-section.active { display: block; }
         
-        /* Neon Glows & Animations */
         .glow-text { text-shadow: 0 0 10px rgba(192, 132, 252, 0.5); }
-        .glow-border:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); border-color: #c084fc; }
+        .glow-border:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); border-color: #c084fc; transform: translateY(-2px); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
-        .live-indicator { animation: pulse-glow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .live-indicator { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased bg-[url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center bg-fixed border-t-4 border-neon-500">
-    <div class="fixed inset-0 bg-dark-950/90 z-0"></div>
+<body class="min-h-screen flex flex-col antialiased bg-dark-950 border-t-4 border-neon-500">
 
-    <nav class="border-b border-neon-500/30 bg-dark-950/80 backdrop-blur-md sticky top-0 z-40">
+    <nav class="border-b border-neon-500/30 bg-dark-950/90 backdrop-blur-md sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-neon-600 flex items-center justify-center border border-neon-400 shadow-[0_0_15px_rgba(168,85,247,0.5)]">
+                    <div class="w-10 h-10 rounded-lg bg-neon-600 flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.5)]">
                         <i class="fa-solid fa-gamepad text-white text-xl"></i>
                     </div>
-                    <span class="text-3xl font-bold tracking-widest text-white glow-text uppercase">Nexus Vanguard</span>
+                    <span class="text-3xl font-bold tracking-widest text-white glow-text uppercase">Nexus</span>
                 </div>
                 
-                <div class="hidden md:flex space-x-8 h-full items-center">
-                    <button class="nav-btn nav-item active h-full px-1 font-bold text-lg tracking-wide transition-colors hover:text-neon-400 uppercase" data-target="guide">
-                        <i class="fa-solid fa-map mr-2"></i>Getting Started
-                    </button>
-                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 tracking-wide transition-colors hover:text-neon-400 uppercase" data-target="inventory">
-                        <i class="fa-solid fa-box-open mr-2"></i>My NFTs
-                    </button>
-                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 tracking-wide transition-colors hover:text-neon-400 uppercase" data-target="marketplace">
-                        <i class="fa-solid fa-store mr-2"></i>Marketplace
-                    </button>
-                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 tracking-wide transition-colors hover:text-accent-400 uppercase" data-target="play">
-                        <i class="fa-solid fa-khanda mr-2"></i>Arena (Play)
-                    </button>
+                <div class="hidden md:flex space-x-6 h-full items-center">
+                    <button class="nav-btn nav-item active h-full px-1 font-bold text-lg transition-colors hover:text-neon-400 uppercase" data-target="guide">Guide</button>
+                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 transition-colors hover:text-neon-400 uppercase" data-target="inventory">My NFTs</button>
+                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 transition-colors hover:text-neon-400 uppercase" data-target="marketplace">Market</button>
+                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 transition-colors hover:text-accent-400 uppercase" data-target="play">Arena</button>
+                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 transition-colors hover:text-blue-400 uppercase" data-target="tokenomics">Tokenomics</button>
                 </div>
                 
                 <div>
-                    <thirdweb-connect client-id="YOUR_CLIENT_ID" theme="dark"></thirdweb-connect>
+                    <thirdweb-connect client-id="<<< UPDATE_THIS_CLIENT_ID >>>" theme="dark"></thirdweb-connect>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 relative z-10">
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
 
         <section id="guide" class="view-section active">
             <div class="text-center mb-12 mt-8">
                 <h1 class="text-5xl font-bold text-white uppercase tracking-wider mb-4 glow-text">Welcome to the Nexus</h1>
                 <p class="text-xl text-slate-400 max-w-2xl mx-auto">Master the GameFi ecosystem. Play, earn $NOVA tokens, and truly own your assets as verifiable NFTs.</p>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div class="glass-panel rounded-xl p-6 border-t-4 border-t-slate-600 relative overflow-hidden">
                     <div class="text-6xl font-black text-slate-800 absolute -bottom-4 -right-4 opacity-50 z-0">1</div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-slate-300 mb-4 border border-slate-600">
-                            <i class="fa-solid fa-wallet text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Connect & Install</h3>
-                        <p class="text-sm text-slate-400 font-medium">Link your Web3 wallet to generate your player profile and access the smart contracts securely.</p>
+                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-slate-300 mb-4 border border-slate-600"><i class="fa-solid fa-wallet text-xl"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Connect</h3>
+                        <p class="text-sm text-slate-400 font-medium">Link your Web3 wallet to generate your player profile and securely access the smart contracts.</p>
                     </div>
                 </div>
-
                 <div class="glass-panel rounded-xl p-6 border-t-4 border-t-accent-500 relative overflow-hidden">
                     <div class="text-6xl font-black text-slate-800 absolute -bottom-4 -right-4 opacity-50 z-0">2</div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-accent-400 mb-4 border border-accent-500/50 shadow-[0_0_10px_rgba(45,212,191,0.3)]">
-                            <i class="fa-solid fa-hand-fist text-xl"></i>
-                        </div>
+                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-accent-400 mb-4 border border-accent-500/50 shadow-[0_0_10px_rgba(45,212,191,0.3)]"><i class="fa-solid fa-hand-fist text-xl"></i></div>
                         <h3 class="text-xl font-bold text-white mb-2 uppercase">Play & Earn</h3>
-                        <p class="text-sm text-slate-400 font-medium">Claim your free Basic Character NFT. Enter the Arena, complete quests, and earn $NOVA tokens for your contributions.</p>
+                        <p class="text-sm text-slate-400 font-medium">Enter the Arena, complete quests, and earn $NOVA tokens for your contributions to the ecosystem.</p>
                     </div>
                 </div>
-
                 <div class="glass-panel rounded-xl p-6 border-t-4 border-t-neon-500 relative overflow-hidden">
                     <div class="text-6xl font-black text-slate-800 absolute -bottom-4 -right-4 opacity-50 z-0">3</div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-neon-400 mb-4 border border-neon-500/50 shadow-[0_0_10px_rgba(168,85,247,0.3)]">
-                            <i class="fa-solid fa-arrow-up-right-dots text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Upgrade & Stake</h3>
-                        <p class="text-sm text-slate-400 font-medium">Burn $NOVA tokens to level up your NFT characters. Stake assets in the vault for passive yield or tournament access.</p>
+                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-neon-400 mb-4 border border-neon-500/50 shadow-[0_0_10px_rgba(168,85,247,0.3)]"><i class="fa-solid fa-arrow-up-right-dots text-xl"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Upgrade</h3>
+                        <p class="text-sm text-slate-400 font-medium">Spend your earned $NOVA to level up your NFT characters or stake them in the protocol vault.</p>
                     </div>
                 </div>
-
                 <div class="glass-panel rounded-xl p-6 border-t-4 border-t-blue-500 relative overflow-hidden">
                     <div class="text-6xl font-black text-slate-800 absolute -bottom-4 -right-4 opacity-50 z-0">4</div>
                     <div class="relative z-10">
-                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-blue-400 mb-4 border border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.3)]">
-                            <i class="fa-solid fa-comments-dollar text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Trade & Rent</h3>
-                        <p class="text-sm text-slate-400 font-medium">Take your skins and weapons to the Marketplace. Trade them securely on-chain, or rent them to other players.</p>
+                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-blue-400 mb-4 border border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.3)]"><i class="fa-solid fa-comments-dollar text-xl"></i></div>
+                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Trade</h3>
+                        <p class="text-sm text-slate-400 font-medium">Take your skins and weapons to the Marketplace to trade them securely on-chain with other players.</p>
                     </div>
                 </div>
-            </div>
-            
-            <div class="text-center mt-12">
-                <button onclick="switchTab('inventory')" class="bg-neon-600 hover:bg-neon-500 text-white font-bold text-lg py-4 px-10 rounded-none border-2 border-neon-400 uppercase tracking-widest shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all transform hover:scale-105">
-                    Initialize Protocol
-                </button>
             </div>
         </section>
 
@@ -152,15 +122,14 @@
                     <p class="text-slate-400">Your verifiable on-chain assets.</p>
                 </div>
                 <div class="text-right glass-panel px-4 py-2 rounded-lg border-accent-500/50">
-                    <p class="text-xs text-slate-400 uppercase">Token Balance</p>
-                    <p class="text-xl font-bold text-accent-400">1,450 <span class="text-sm text-white">NOVA</span></p>
+                    <p class="text-xs text-slate-400 uppercase">Balance</p>
+                    <p class="text-2xl font-bold text-accent-400">1,450 <span class="text-sm text-white">NOVA</span></p>
                 </div>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300 cursor-pointer">
-                    <div class="h-48 bg-dark-800 relative group">
-                        <img src="https://images.unsplash.com/photo-1614027164847-1b28cfe1df60?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Character" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
+                    <div class="h-48 relative">
+                        <img src="https://placehold.co/600x400/1f2937/c084fc?text=NEON+STRIKER&font=oswald" class="w-full h-full object-cover border-b border-neon-500/30">
                         <div class="absolute top-2 right-2 bg-dark-900 border border-neon-500 text-neon-400 text-xs font-bold px-2 py-1 uppercase rounded shadow-[0_0_10px_rgba(168,85,247,0.5)]">Lv. 12</div>
                     </div>
                     <div class="p-5">
@@ -174,10 +143,9 @@
                         </button>
                     </div>
                 </div>
-
-                <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300 cursor-pointer">
-                    <div class="h-48 bg-dark-800 relative group">
-                        <img src="https://images.unsplash.com/photo-1618331835717-801e976710b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Weapon" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition">
+                <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
+                    <div class="h-48 relative">
+                        <img src="https://placehold.co/600x400/1f2937/3b82f6?text=PLASMA+RIFLE&font=oswald" class="w-full h-full object-cover border-b border-blue-500/30">
                         <div class="absolute top-2 right-2 bg-dark-900 border border-blue-500 text-blue-400 text-xs font-bold px-2 py-1 uppercase rounded">Epic</div>
                     </div>
                     <div class="p-5">
@@ -186,9 +154,21 @@
                             <span class="text-xs text-slate-500">#8812</span>
                         </div>
                         <p class="text-sm text-slate-400 mb-4">Type: Heavy Weapon</p>
-                        <button class="w-full border border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white font-bold py-2 uppercase tracking-wide transition">
-                            Equip Asset
-                        </button>
+                        <button class="w-full border border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white font-bold py-2 uppercase tracking-wide transition">Equip Asset</button>
+                    </div>
+                </div>
+                <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
+                    <div class="h-48 relative">
+                        <img src="https://placehold.co/600x400/1f2937/14b8a6?text=CYBER+HOUND&font=oswald" class="w-full h-full object-cover border-b border-accent-500/30">
+                        <div class="absolute top-2 right-2 bg-dark-900 border border-accent-500 text-accent-400 text-xs font-bold px-2 py-1 uppercase rounded">Rare Pet</div>
+                    </div>
+                    <div class="p-5">
+                        <div class="flex justify-between items-center mb-1">
+                            <h3 class="font-bold text-xl text-white uppercase">Cyber Hound</h3>
+                            <span class="text-xs text-slate-500">#1109</span>
+                        </div>
+                        <p class="text-sm text-slate-400 mb-4">Buff: +15% Agility</p>
+                        <button class="w-full border border-accent-500 text-accent-400 hover:bg-accent-600 hover:text-white font-bold py-2 uppercase tracking-wide transition">Equip Asset</button>
                     </div>
                 </div>
             </div>
@@ -197,136 +177,181 @@
         <section id="marketplace" class="view-section">
             <h2 class="text-3xl font-bold text-white uppercase glow-text mb-2">Black Market</h2>
             <p class="text-slate-400 mb-8">Acquire rare assets directly from the Smart Contract using $NOVA tokens.</p>
-            
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <div class="w-full h-32 bg-dark-800 rounded-lg mb-4 overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1633519124446-281b3d0f47e7?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
-                    </div>
+                    <img src="https://placehold.co/400x300/111827/a855f7?text=ENERGY+SHIELD" class="w-full h-32 object-cover rounded-lg mb-4 border border-neon-500/30">
                     <h3 class="font-bold text-white uppercase mb-1">Energy Shield</h3>
                     <p class="text-xl font-bold text-accent-400 mb-4">250 NOVA</p>
-                    <button onclick="mockPurchase('Energy Shield', 250)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">
-                        Purchase
-                    </button>
+                    <button onclick="mockTx('Energy Shield', 250)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
                 </div>
-
                 <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <div class="w-full h-32 bg-dark-800 rounded-lg mb-4 overflow-hidden border-2 border-amber-500">
-                        <img src="https://images.unsplash.com/photo-1616423640778-28d1b53229bd?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover">
-                    </div>
-                    <h3 class="font-bold text-white uppercase mb-1 text-amber-500">Genesis Plot</h3>
+                    <img src="https://placehold.co/400x300/111827/f59e0b?text=GENESIS+PLOT" class="w-full h-32 object-cover rounded-lg mb-4 border border-amber-500/50">
+                    <h3 class="font-bold text-amber-500 uppercase mb-1">Genesis Land</h3>
                     <p class="text-xl font-bold text-accent-400 mb-4">5,000 NOVA</p>
-                    <button onclick="mockPurchase('Genesis Plot (Land)', 5000)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">
-                        Purchase
-                    </button>
+                    <button onclick="mockTx('Genesis Land', 5000)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
+                </div>
+                <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
+                    <img src="https://placehold.co/400x300/111827/ef4444?text=MYSTERY+BOX" class="w-full h-32 object-cover rounded-lg mb-4 border border-red-500/50">
+                    <h3 class="font-bold text-red-400 uppercase mb-1">Lootbox (ERC-1155)</h3>
+                    <p class="text-xl font-bold text-accent-400 mb-4">100 NOVA</p>
+                    <button onclick="mockTx('Mystery Box', 100)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
+                </div>
+                <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
+                    <img src="https://placehold.co/400x300/111827/ec4899?text=NEON+SKIN" class="w-full h-32 object-cover rounded-lg mb-4 border border-pink-500/50">
+                    <h3 class="font-bold text-pink-400 uppercase mb-1">Chroma Skin</h3>
+                    <p class="text-xl font-bold text-accent-400 mb-4">800 NOVA</p>
+                    <button onclick="mockTx('Chroma Skin', 800)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
                 </div>
             </div>
         </section>
 
         <section id="play" class="view-section">
-            <div class="max-w-3xl mx-auto text-center mt-10">
-                <div class="inline-flex items-center justify-center space-x-2 bg-dark-800 border border-red-500/50 px-4 py-1 rounded-full mb-6">
-                    <div class="w-2 h-2 rounded-full bg-red-500 live-indicator"></div>
-                    <span class="text-xs text-red-400 font-bold uppercase tracking-widest">Server Live</span>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-4">
+                <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-accent-500 h-fit">
+                    <h3 class="text-xl font-bold text-white uppercase border-b border-slate-700 pb-2 mb-4">Combat Record</h3>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Current Rank</span>
+                            <span class="text-accent-400 font-bold uppercase">Gold Nova II</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Win Rate</span>
+                            <span class="text-white font-bold">64.2%</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-slate-400">Total Matches</span>
+                            <span class="text-white font-bold">128</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-4 border-t border-slate-700">
+                            <span class="text-slate-400">Lifetime Earnings</span>
+                            <span class="text-neon-400 font-bold">14,500 NOVA</span>
+                        </div>
+                    </div>
                 </div>
-                
-                <h2 class="text-5xl font-black text-white uppercase glow-text mb-4">The Arena</h2>
-                <p class="text-lg text-slate-400 mb-10">Deploy your NFTs into the simulation. Win matches to trigger the Smart Contract and mint $NOVA tokens as a reward.</p>
-                
-                <div class="glass-panel p-10 border-2 border-neon-500 rounded-2xl relative">
-                    <div class="absolute top-2 left-2 w-4 h-4 border-t-2 border-l-2 border-neon-500"></div>
-                    <div class="absolute top-2 right-2 w-4 h-4 border-t-2 border-r-2 border-neon-500"></div>
-                    <div class="absolute bottom-2 left-2 w-4 h-4 border-b-2 border-l-2 border-neon-500"></div>
-                    <div class="absolute bottom-2 right-2 w-4 h-4 border-b-2 border-r-2 border-neon-500"></div>
 
-                    <i class="fa-solid fa-crosshairs text-6xl text-slate-700 mb-6"></i>
+                <div class="lg:col-span-2 text-center">
+                    <div class="inline-flex items-center justify-center space-x-2 bg-dark-800 border border-red-500/50 px-4 py-1 rounded-full mb-6">
+                        <div class="w-2 h-2 rounded-full bg-red-500 live-indicator"></div>
+                        <span class="text-xs text-red-400 font-bold uppercase tracking-widest">Server Live: US-East</span>
+                    </div>
+                    <h2 class="text-5xl font-black text-white uppercase glow-text mb-4">The Arena</h2>
+                    <p class="text-lg text-slate-400 mb-8">Deploy your NFTs into the simulation. Win matches to trigger the Smart Contract and mint $NOVA tokens.</p>
                     
-                    <div>
-                        <button onclick="simulateGameplay()" id="playBtn" class="bg-transparent hover:bg-neon-600 text-neon-400 hover:text-white font-black text-2xl py-6 px-12 rounded-none border-4 border-neon-500 uppercase tracking-widest transition-all">
+                    <div class="glass-panel p-12 border-2 border-accent-500 rounded-2xl relative bg-dark-900/50">
+                        <i class="fa-solid fa-crosshairs text-6xl text-slate-700 mb-8"></i><br>
+                        <button onclick="simulateMatch()" id="playBtn" class="bg-dark-800 hover:bg-accent-600 text-accent-400 hover:text-white font-black text-2xl py-6 px-12 rounded-lg border-2 border-accent-500 uppercase tracking-widest shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all">
                             Initialize Match
                         </button>
                     </div>
                 </div>
             </div>
         </section>
+
+        <section id="tokenomics" class="view-section">
+            <h2 class="text-3xl font-bold text-white uppercase glow-text mb-8">Ecosystem Architecture</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="glass-panel p-8 rounded-2xl border border-neon-500/30">
+                    <h3 class="text-xl font-bold text-neon-400 uppercase mb-4"><i class="fa-solid fa-coins mr-2"></i>The Game Token (ERC-20)</h3>
+                    <p class="text-slate-300 mb-4 leading-relaxed">The <strong class="text-white">NOVA Token</strong> is the lifeblood of the economy. It is an infinitely divisible, fungible currency deployed via a smart contract.</p>
+                    <ul class="text-slate-400 space-y-2 text-sm">
+                        <li>• <strong class="text-white">Minting:</strong> Tokens are dynamically minted by the protocol and sent to players' wallets upon winning matches.</li>
+                        <li>• <strong class="text-white">Utility:</strong> Required to purchase marketplace items or upgrade existing assets.</li>
+                        <li>• <strong class="text-white">Burning:</strong> Spent tokens are burned (removed from supply) to combat inflation.</li>
+                    </ul>
+                </div>
+
+                <div class="glass-panel p-8 rounded-2xl border border-blue-500/30">
+                    <h3 class="text-xl font-bold text-blue-400 uppercase mb-4"><i class="fa-solid fa-cube mr-2"></i>Digital Assets (ERC-721)</h3>
+                    <p class="text-slate-300 mb-4 leading-relaxed">Characters, weapons, and land are deployed as <strong class="text-white">Non-Fungible Tokens</strong>. Every item is unique and provably owned by the player's wallet address.</p>
+                    <ul class="text-slate-400 space-y-2 text-sm">
+                        <li>• <strong class="text-white">Interoperability:</strong> Because they are ERC-721 compliant, players can sell these assets on third-party markets like OpenSea.</li>
+                        <li>• <strong class="text-white">Metadata:</strong> Item stats (like level and class) are permanently stored in the token's metadata URI.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
-        // Tab Switching Logic
         const navBtns = document.querySelectorAll('.nav-btn');
         const sections = document.querySelectorAll('.view-section');
 
         navBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 navBtns.forEach(b => {
-                    b.classList.remove('active', 'text-neon-400');
+                    b.classList.remove('active', 'text-neon-400', 'text-accent-400', 'text-blue-400');
                     b.classList.add('text-slate-400');
                     b.style.borderBottom = "none";
                     b.style.textShadow = "none";
                 });
-                btn.classList.add('active', 'text-neon-400');
-                btn.classList.remove('text-slate-400');
-                btn.style.borderBottom = "2px solid #c084fc";
-                btn.style.textShadow = "0 0 10px rgba(192, 132, 252, 0.5)";
+                
+                const targetId = btn.getAttribute('data-target');
+                let highlightColor = '#c084fc'; // Default neon purple
+                if(targetId === 'play') highlightColor = '#2dd4bf'; // Accent teal
+                if(targetId === 'tokenomics') highlightColor = '#60a5fa'; // Blue
+                
+                btn.classList.add('active');
+                btn.style.color = highlightColor;
+                btn.style.borderBottom = `2px solid ${highlightColor}`;
+                btn.style.textShadow = `0 0 10px ${highlightColor}80`;
 
                 sections.forEach(sec => sec.classList.remove('active'));
-                document.getElementById(btn.getAttribute('data-target')).classList.add('active');
+                document.getElementById(targetId).classList.add('active');
             });
         });
 
-        window.switchTab = function(targetId) { document.querySelector(`.nav-btn[data-target="${targetId}"]`).click(); }
-
-        // Mock Game Interactions (For demonstration)
-        window.mockPurchase = function(itemName, price) {
-            alert(`METAMASK POPUP:\n\nApprove Smart Contract to spend ${price} NOVA tokens to mint [${itemName}] NFT?`);
+        window.mockTx = function(item, price) {
+            alert(`--- SMART CONTRACT INTERACTION ---\n\nApprove transaction to spend ${price} NOVA tokens?\n\nIf approved, the ERC-721 contract will mint [ ${item} ] directly to your connected wallet.`);
         }
 
-        window.simulateGameplay = function() {
+        window.simulateMatch = function() {
             const btn = document.getElementById('playBtn');
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Simulating Battle...';
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing Match Data...';
             btn.disabled = true;
-            btn.classList.remove('text-neon-400', 'hover:bg-neon-600');
-            btn.classList.add('text-slate-500', 'border-slate-500');
+            btn.style.borderColor = '#64748b';
+            btn.style.color = '#64748b';
 
             setTimeout(() => {
                 btn.innerHTML = 'Initialize Match';
                 btn.disabled = false;
-                btn.classList.add('text-neon-400', 'hover:bg-neon-600');
-                btn.classList.remove('text-slate-500', 'border-slate-500');
+                btn.style.borderColor = '#2dd4bf';
+                btn.style.color = '#2dd4bf';
                 
-                alert("Victory!\n\nTriggering ERC-20 Smart Contract...\nReward: +50 NOVA tokens deposited to your wallet!");
+                alert("⚔️ VICTORY! ⚔️\n\nYour performance triggered the ERC-20 Reward Contract.\n\n+50 NOVA tokens have been minted and deposited into your wallet.");
             }, 2500);
         }
     </script>
 
     <script type="module">
         import { createThirdwebClient, getContract } from "https://esm.sh/thirdweb";
-        // import { claimTo } from "https://esm.sh/thirdweb/extensions/erc721"; // For buying NFTs
-        // import { transfer } from "https://esm.sh/thirdweb/extensions/erc20"; // For spending Game Tokens
 
-        // Connect Client
-        const client = createThirdwebClient({ clientId: "YOUR_CLIENT_ID" });
-
-        // Connect Game Currency Contract (ERC-20)
-        const tokenContract = getContract({
-            client,
-            chain: 11155111, // Sepolia Testnet
-            address: "YOUR_GAME_TOKEN_ADDRESS" // e.g., your AURO token or a new NOVA token
-        });
-
-        // Connect NFT Contract (ERC-721 / ERC-1155)
-        const nftContract = getContract({
-            client,
-            chain: 11155111,
-            address: "YOUR_NFT_CONTRACT_ADDRESS" 
-        });
-
-        /* Note for Professor/Grading: 
-           This module handles the marketplace and earning logic.
-           When a user clicks "Purchase" in the Marketplace tab, we execute:
-           1. transfer() on the tokenContract (Paying the game treasury).
-           2. claimTo() on the nftContract (Minting the weapon/character to the user's wallet).
+        /* =====================================================================
+           If you write Python, setting up these Web3 connections is just like 
+           defining a dictionary of variables at the top of a script. 
+           Update the strings below with your actual data from the dashboard!
+           =====================================================================
         */
+
+        // 1. UPDATE THIS: Your Thirdweb Client ID 
+        const client = createThirdwebClient({ 
+            clientId: "<<< UPDATE_THIS_CLIENT_ID >>>" 
+        });
+
+        // 2. UPDATE THIS: Your Game Currency Contract (ERC-20)
+        const gameTokenContract = getContract({
+            client,
+            chain: 11155111, // Sepolia ID
+            address: "<<< UPDATE_THIS_ERC20_TOKEN_ADDRESS >>>" 
+        });
+
+        // 3. UPDATE THIS: Your Game Assets Contract (ERC-721 NFT)
+        // (You can leave this blank if you haven't deployed an NFT collection yet!)
+        const gameNftContract = getContract({
+            client,
+            chain: 11155111, 
+            address: "<<< UPDATE_THIS_ERC721_NFT_ADDRESS >>>" 
+        });
+
     </script>
 </body>
 </html>
