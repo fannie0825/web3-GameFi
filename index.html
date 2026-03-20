@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus Vanguard | Web3 Gaming</title>
+    <title>BlockStay | Decentralized Travel</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -14,344 +14,324 @@
             theme: {
                 extend: {
                     colors: {
-                        neon: { 400: '#c084fc', 500: '#a855f7', 600: '#9333ea' },
-                        accent: { 400: '#2dd4bf', 500: '#14b8a6' },
-                        dark: { 800: '#1f2937', 900: '#111827', 950: '#030712' }
+                        brand: { 50: '#fff1f2', 100: '#ffe4e6', 500: '#ff385c', 600: '#e11d48', 900: '#881337' },
+                        dark: { 900: '#111827' }
                     },
-                    fontFamily: { sans: ['Rajdhani', 'sans-serif'] }
+                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
                 }
             }
         }
     </script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
-        body { background-color: #030712; color: #f3f4f6; overflow-x: hidden; font-family: 'Rajdhani', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { background-color: #f8fafc; color: #0f172a; overflow-x: hidden; }
         
-        .glass-panel { 
-            background: rgba(17, 24, 39, 0.8); 
-            backdrop-filter: blur(12px); 
-            border: 1px solid rgba(168, 85, 247, 0.2); 
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.05);
-        }
-        .nav-item.active { color: #c084fc; border-bottom: 2px solid #c084fc; text-shadow: 0 0 10px rgba(192, 132, 252, 0.5); }
-        .view-section { display: none; animation: fadeIn 0.3s ease-in-out; }
-        .view-section.active { display: block; }
+        .property-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .property-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
         
-        .glow-text { text-shadow: 0 0 10px rgba(192, 132, 252, 0.5); }
-        .glow-border:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); border-color: #c084fc; transform: translateY(-2px); }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .live-indicator { animation: pulse 2s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        /* Modal Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .modal-bg { animation: fadeIn 0.3s ease-out forwards; }
+        .modal-content { animation: slideUp 0.3s ease-out forwards; }
+        
+        .toast { animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
     </style>
 </head>
-<body class="min-h-screen flex flex-col antialiased bg-dark-950 border-t-4 border-neon-500">
+<body class="min-h-screen flex flex-col antialiased relative">
 
-    <nav class="border-b border-neon-500/30 bg-dark-950/90 backdrop-blur-md sticky top-0 z-40">
+    <nav class="bg-white/80 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-neon-600 flex items-center justify-center shadow-[0_0_15px_rgba(168,85,247,0.5)]">
-                        <i class="fa-solid fa-gamepad text-white text-xl"></i>
+                <div class="flex items-center gap-2 cursor-pointer">
+                    <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center shadow-lg shadow-brand-500/30 transform -rotate-12 transition group-hover:rotate-0">
+                        <i class="fa-solid fa-house-chimney text-white"></i>
                     </div>
-                    <span class="text-3xl font-bold tracking-widest text-white glow-text uppercase">Nexus</span>
+                    <span class="text-2xl font-extrabold tracking-tight text-slate-900">BlockStay</span>
                 </div>
                 
-                <div class="hidden md:flex space-x-6 h-full items-center">
-                    <button class="nav-btn nav-item active h-full px-1 font-bold text-lg transition-colors hover:text-neon-400 uppercase" data-target="guide">Guide</button>
-                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 transition-colors hover:text-neon-400 uppercase" data-target="inventory">My NFTs</button>
-                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 transition-colors hover:text-neon-400 uppercase" data-target="marketplace">Market</button>
-                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 transition-colors hover:text-accent-400 uppercase" data-target="play">Arena</button>
-                    <button class="nav-btn nav-item h-full px-1 font-bold text-lg text-slate-400 transition-colors hover:text-blue-400 uppercase" data-target="tokenomics">Tokenomics</button>
+                <div class="hidden md:flex items-center bg-white border border-slate-200 rounded-full px-4 py-2 shadow-sm hover:shadow-md transition cursor-pointer">
+                    <span class="text-sm font-medium border-r border-slate-200 pr-4">Anywhere</span>
+                    <span class="text-sm font-medium border-r border-slate-200 px-4">Any week</span>
+                    <span class="text-sm text-slate-500 pl-4 pr-3">Add guests</span>
+                    <div class="bg-brand-500 text-white p-2 rounded-full w-8 h-8 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass text-xs"></i>
+                    </div>
                 </div>
                 
                 <div>
-                    <thirdweb-connect client-id="<<< UPDATE_THIS_CLIENT_ID >>>" theme="dark"></thirdweb-connect>
+                    <thirdweb-connect client-id="YOUR_CLIENT_ID" theme="light"></thirdweb-connect>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-grow max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-10">
+        
+        <div class="mb-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-4 text-slate-900">Find your next decentralized stay.</h1>
+            <p class="text-xl text-slate-500">Book unique homes and experiences worldwide using your custom Web3 tokens.</p>
+        </div>
 
-        <section id="guide" class="view-section active">
-            <div class="text-center mb-12 mt-8">
-                <h1 class="text-5xl font-bold text-white uppercase tracking-wider mb-4 glow-text">Welcome to the Nexus</h1>
-                <p class="text-xl text-slate-400 max-w-2xl mx-auto">Master the GameFi ecosystem. Play, earn $NOVA tokens, and truly own your assets as verifiable NFTs.</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-panel rounded-xl p-6 border-t-4 border-t-slate-600 relative overflow-hidden">
-                    <div class="text-6xl font-black text-slate-800 absolute -bottom-4 -right-4 opacity-50 z-0">1</div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-slate-300 mb-4 border border-slate-600"><i class="fa-solid fa-wallet text-xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Connect</h3>
-                        <p class="text-sm text-slate-400 font-medium">Link your Web3 wallet to generate your player profile and securely access the smart contracts.</p>
-                    </div>
-                </div>
-                <div class="glass-panel rounded-xl p-6 border-t-4 border-t-accent-500 relative overflow-hidden">
-                    <div class="text-6xl font-black text-slate-800 absolute -bottom-4 -right-4 opacity-50 z-0">2</div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-accent-400 mb-4 border border-accent-500/50 shadow-[0_0_10px_rgba(45,212,191,0.3)]"><i class="fa-solid fa-hand-fist text-xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Play & Earn</h3>
-                        <p class="text-sm text-slate-400 font-medium">Enter the Arena, complete quests, and earn $NOVA tokens for your contributions to the ecosystem.</p>
-                    </div>
-                </div>
-                <div class="glass-panel rounded-xl p-6 border-t-4 border-t-neon-500 relative overflow-hidden">
-                    <div class="text-6xl font-black text-slate-800 absolute -bottom-4 -right-4 opacity-50 z-0">3</div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-neon-400 mb-4 border border-neon-500/50 shadow-[0_0_10px_rgba(168,85,247,0.3)]"><i class="fa-solid fa-arrow-up-right-dots text-xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Upgrade</h3>
-                        <p class="text-sm text-slate-400 font-medium">Spend your earned $NOVA to level up your NFT characters or stake them in the protocol vault.</p>
-                    </div>
-                </div>
-                <div class="glass-panel rounded-xl p-6 border-t-4 border-t-blue-500 relative overflow-hidden">
-                    <div class="text-6xl font-black text-slate-800 absolute -bottom-4 -right-4 opacity-50 z-0">4</div>
-                    <div class="relative z-10">
-                        <div class="w-12 h-12 bg-dark-800 rounded-full flex items-center justify-center text-blue-400 mb-4 border border-blue-500/50 shadow-[0_0_10px_rgba(59,130,246,0.3)]"><i class="fa-solid fa-comments-dollar text-xl"></i></div>
-                        <h3 class="text-xl font-bold text-white mb-2 uppercase">Trade</h3>
-                        <p class="text-sm text-slate-400 font-medium">Take your skins and weapons to the Marketplace to trade them securely on-chain with other players.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
 
-        <section id="inventory" class="view-section">
-            <div class="flex justify-between items-end mb-8 border-b border-neon-500/30 pb-4">
-                <div>
-                    <h2 class="text-3xl font-bold text-white uppercase glow-text">Arsenal (ERC-721)</h2>
-                    <p class="text-slate-400">Your verifiable on-chain assets.</p>
-                </div>
-                <div class="text-right glass-panel px-4 py-2 rounded-lg border-accent-500/50">
-                    <p class="text-xs text-slate-400 uppercase">Balance</p>
-                    <p class="text-2xl font-bold text-accent-400">1,450 <span class="text-sm text-white">NOVA</span></p>
-                </div>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
-                    <div class="h-48 relative">
-                        <img src="https://placehold.co/600x400/1f2937/c084fc?text=NEON+STRIKER&font=oswald" class="w-full h-full object-cover border-b border-neon-500/30">
-                        <div class="absolute top-2 right-2 bg-dark-900 border border-neon-500 text-neon-400 text-xs font-bold px-2 py-1 uppercase rounded shadow-[0_0_10px_rgba(168,85,247,0.5)]">Lv. 12</div>
+            <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 property-card flex flex-col cursor-pointer group" onclick="openBookingModal('Cyberpunk Loft', 'Neo-Tokyo, Japan', 150, 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                <div class="h-64 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-xs font-bold shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-star text-brand-500"></i> 4.98
                     </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-1">
-                            <h3 class="font-bold text-xl text-white uppercase">Neon Striker</h3>
-                            <span class="text-xs text-slate-500">#0042</span>
-                        </div>
-                        <p class="text-sm text-slate-400 mb-4">Class: Vanguard</p>
-                        <button class="w-full border border-neon-500 text-neon-400 hover:bg-neon-600 hover:text-white font-bold py-2 uppercase tracking-wide transition">
-                            <i class="fa-solid fa-arrow-up"></i> Upgrade (500 NOVA)
-                        </button>
+                    <div class="absolute top-3 left-3 bg-brand-500 text-white px-2 py-1 rounded-md text-xs font-bold shadow-sm">
+                        Superhost
                     </div>
                 </div>
-                <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
-                    <div class="h-48 relative">
-                        <img src="https://placehold.co/600x400/1f2937/3b82f6?text=PLASMA+RIFLE&font=oswald" class="w-full h-full object-cover border-b border-blue-500/30">
-                        <div class="absolute top-2 right-2 bg-dark-900 border border-blue-500 text-blue-400 text-xs font-bold px-2 py-1 uppercase rounded">Epic</div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg leading-tight text-slate-900 mb-1">Cyberpunk Loft</h3>
+                        <p class="text-slate-500 text-sm mb-4">Neo-Tokyo, Japan</p>
                     </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-1">
-                            <h3 class="font-bold text-xl text-white uppercase">Plasma Rifle</h3>
-                            <span class="text-xs text-slate-500">#8812</span>
-                        </div>
-                        <p class="text-sm text-slate-400 mb-4">Type: Heavy Weapon</p>
-                        <button class="w-full border border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white font-bold py-2 uppercase tracking-wide transition">Equip Asset</button>
-                    </div>
-                </div>
-                <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
-                    <div class="h-48 relative">
-                        <img src="https://placehold.co/600x400/1f2937/14b8a6?text=CYBER+HOUND&font=oswald" class="w-full h-full object-cover border-b border-accent-500/30">
-                        <div class="absolute top-2 right-2 bg-dark-900 border border-accent-500 text-accent-400 text-xs font-bold px-2 py-1 uppercase rounded">Rare Pet</div>
-                    </div>
-                    <div class="p-5">
-                        <div class="flex justify-between items-center mb-1">
-                            <h3 class="font-bold text-xl text-white uppercase">Cyber Hound</h3>
-                            <span class="text-xs text-slate-500">#1109</span>
-                        </div>
-                        <p class="text-sm text-slate-400 mb-4">Buff: +15% Agility</p>
-                        <button class="w-full border border-accent-500 text-accent-400 hover:bg-accent-600 hover:text-white font-bold py-2 uppercase tracking-wide transition">Equip Asset</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="marketplace" class="view-section">
-            <h2 class="text-3xl font-bold text-white uppercase glow-text mb-2">Black Market</h2>
-            <p class="text-slate-400 mb-8">Acquire rare assets directly from the Smart Contract using $NOVA tokens.</p>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <img src="https://placehold.co/400x300/111827/a855f7?text=ENERGY+SHIELD" class="w-full h-32 object-cover rounded-lg mb-4 border border-neon-500/30">
-                    <h3 class="font-bold text-white uppercase mb-1">Energy Shield</h3>
-                    <p class="text-xl font-bold text-accent-400 mb-4">250 NOVA</p>
-                    <button onclick="mockTx('Energy Shield', 250)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
-                </div>
-                <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <img src="https://placehold.co/400x300/111827/f59e0b?text=GENESIS+PLOT" class="w-full h-32 object-cover rounded-lg mb-4 border border-amber-500/50">
-                    <h3 class="font-bold text-amber-500 uppercase mb-1">Genesis Land</h3>
-                    <p class="text-xl font-bold text-accent-400 mb-4">5,000 NOVA</p>
-                    <button onclick="mockTx('Genesis Land', 5000)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
-                </div>
-                <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <img src="https://placehold.co/400x300/111827/ef4444?text=MYSTERY+BOX" class="w-full h-32 object-cover rounded-lg mb-4 border border-red-500/50">
-                    <h3 class="font-bold text-red-400 uppercase mb-1">Lootbox (ERC-1155)</h3>
-                    <p class="text-xl font-bold text-accent-400 mb-4">100 NOVA</p>
-                    <button onclick="mockTx('Mystery Box', 100)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
-                </div>
-                <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <img src="https://placehold.co/400x300/111827/ec4899?text=NEON+SKIN" class="w-full h-32 object-cover rounded-lg mb-4 border border-pink-500/50">
-                    <h3 class="font-bold text-pink-400 uppercase mb-1">Chroma Skin</h3>
-                    <p class="text-xl font-bold text-accent-400 mb-4">800 NOVA</p>
-                    <button onclick="mockTx('Chroma Skin', 800)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
-                </div>
-            </div>
-        </section>
-
-        <section id="play" class="view-section">
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-4">
-                <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-accent-500 h-fit">
-                    <h3 class="text-xl font-bold text-white uppercase border-b border-slate-700 pb-2 mb-4">Combat Record</h3>
-                    <div class="space-y-4">
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Current Rank</span>
-                            <span class="text-accent-400 font-bold uppercase">Gold Nova II</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Win Rate</span>
-                            <span class="text-white font-bold">64.2%</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-slate-400">Total Matches</span>
-                            <span class="text-white font-bold">128</span>
-                        </div>
-                        <div class="flex justify-between items-center pt-4 border-t border-slate-700">
-                            <span class="text-slate-400">Lifetime Earnings</span>
-                            <span class="text-neon-400 font-bold">14,500 NOVA</span>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="font-bold text-lg text-slate-900">150 AURO</span>
+                            <span class="text-sm text-slate-500">/ night</span>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div class="lg:col-span-2 text-center">
-                    <div class="inline-flex items-center justify-center space-x-2 bg-dark-800 border border-red-500/50 px-4 py-1 rounded-full mb-6">
-                        <div class="w-2 h-2 rounded-full bg-red-500 live-indicator"></div>
-                        <span class="text-xs text-red-400 font-bold uppercase tracking-widest">Server Live: US-East</span>
+            <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 property-card flex flex-col cursor-pointer group" onclick="openBookingModal('Alpine Node Retreat', 'Swiss Alps, Switzerland', 220, 'https://images.unsplash.com/photo-1518733057094-95b53143d2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                <div class="h-64 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518733057094-95b53143d2a7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-xs font-bold shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-star text-brand-500"></i> 4.92
                     </div>
-                    <h2 class="text-5xl font-black text-white uppercase glow-text mb-4">The Arena</h2>
-                    <p class="text-lg text-slate-400 mb-8">Deploy your NFTs into the simulation. Win matches to trigger the Smart Contract and mint $NOVA tokens.</p>
-                    
-                    <div class="glass-panel p-12 border-2 border-accent-500 rounded-2xl relative bg-dark-900/50">
-                        <i class="fa-solid fa-crosshairs text-6xl text-slate-700 mb-8"></i><br>
-                        <button onclick="simulateMatch()" id="playBtn" class="bg-dark-800 hover:bg-accent-600 text-accent-400 hover:text-white font-black text-2xl py-6 px-12 rounded-lg border-2 border-accent-500 uppercase tracking-widest shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all">
-                            Initialize Match
-                        </button>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg leading-tight text-slate-900 mb-1">Alpine Node Retreat</h3>
+                        <p class="text-slate-500 text-sm mb-4">Swiss Alps, Switzerland</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="font-bold text-lg text-slate-900">220 AURO</span>
+                            <span class="text-sm text-slate-500">/ night</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
 
-        <section id="tokenomics" class="view-section">
-            <h2 class="text-3xl font-bold text-white uppercase glow-text mb-8">Ecosystem Architecture</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="glass-panel p-8 rounded-2xl border border-neon-500/30">
-                    <h3 class="text-xl font-bold text-neon-400 uppercase mb-4"><i class="fa-solid fa-coins mr-2"></i>The Game Token (ERC-20)</h3>
-                    <p class="text-slate-300 mb-4 leading-relaxed">The <strong class="text-white">NOVA Token</strong> is the lifeblood of the economy. It is an infinitely divisible, fungible currency deployed via a smart contract.</p>
-                    <ul class="text-slate-400 space-y-2 text-sm">
-                        <li>• <strong class="text-white">Minting:</strong> Tokens are dynamically minted by the protocol and sent to players' wallets upon winning matches.</li>
-                        <li>• <strong class="text-white">Utility:</strong> Required to purchase marketplace items or upgrade existing assets.</li>
-                        <li>• <strong class="text-white">Burning:</strong> Spent tokens are burned (removed from supply) to combat inflation.</li>
-                    </ul>
+            <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 property-card flex flex-col cursor-pointer group" onclick="openBookingModal('Genesis Block Villa', 'Bali, Indonesia', 300, 'https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                <div class="h-64 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-xs font-bold shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-star text-brand-500"></i> 5.00
+                    </div>
+                    <div class="absolute top-3 left-3 bg-slate-900 text-white px-2 py-1 rounded-md text-xs font-bold shadow-sm">
+                        Rare Find
+                    </div>
                 </div>
-
-                <div class="glass-panel p-8 rounded-2xl border border-blue-500/30">
-                    <h3 class="text-xl font-bold text-blue-400 uppercase mb-4"><i class="fa-solid fa-cube mr-2"></i>Digital Assets (ERC-721)</h3>
-                    <p class="text-slate-300 mb-4 leading-relaxed">Characters, weapons, and land are deployed as <strong class="text-white">Non-Fungible Tokens</strong>. Every item is unique and provably owned by the player's wallet address.</p>
-                    <ul class="text-slate-400 space-y-2 text-sm">
-                        <li>• <strong class="text-white">Interoperability:</strong> Because they are ERC-721 compliant, players can sell these assets on third-party markets like OpenSea.</li>
-                        <li>• <strong class="text-white">Metadata:</strong> Item stats (like level and class) are permanently stored in the token's metadata URI.</li>
-                    </ul>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg leading-tight text-slate-900 mb-1">Genesis Block Villa</h3>
+                        <p class="text-slate-500 text-sm mb-4">Bali, Indonesia</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="font-bold text-lg text-slate-900">300 AURO</span>
+                            <span class="text-sm text-slate-500">/ night</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </section>
+            
+            <div class="bg-white rounded-2xl overflow-hidden border border-slate-100 property-card flex flex-col cursor-pointer group" onclick="openBookingModal('Satoshi Glass House', 'Tulum, Mexico', 185, 'https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')">
+                <div class="h-64 relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1510798831971-661eb04b3739?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-2 py-1 rounded-md text-xs font-bold shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-star text-brand-500"></i> 4.88
+                    </div>
+                </div>
+                <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="font-bold text-lg leading-tight text-slate-900 mb-1">Satoshi Glass House</h3>
+                        <p class="text-slate-500 text-sm mb-4">Tulum, Mexico</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="font-bold text-lg text-slate-900">185 AURO</span>
+                            <span class="text-sm text-slate-500">/ night</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </main>
 
+    <div id="bookingModalOverlay" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center sm:p-4 opacity-0 transition-opacity duration-300" onclick="closeModal(event)">
+        
+        <div id="bookingModal" class="bg-white sm:rounded-3xl rounded-t-3xl w-full max-w-4xl hidden overflow-hidden shadow-2xl flex flex-col sm:flex-row max-h-[90vh]" onclick="event.stopPropagation()">
+            
+            <div class="sm:w-1/2 h-64 sm:h-auto relative">
+                <img id="modalImg" src="" class="w-full h-full object-cover">
+                <button onclick="closeModal()" class="absolute top-4 left-4 sm:hidden bg-white w-8 h-8 rounded-full flex items-center justify-center shadow">
+                    <i class="fa-solid fa-times text-slate-900"></i>
+                </button>
+            </div>
+            
+            <div class="sm:w-1/2 p-6 sm:p-10 flex flex-col overflow-y-auto">
+                <div class="flex justify-between items-start mb-6 hidden sm:flex">
+                    <h3 class="text-2xl font-bold text-slate-900" id="modalTitle">Property Name</h3>
+                    <button onclick="closeModal()" class="text-slate-400 hover:text-slate-900 transition"><i class="fa-solid fa-times text-xl"></i></button>
+                </div>
+                
+                <h3 class="text-2xl font-bold text-slate-900 mb-1 sm:hidden" id="modalTitleMobile">Property Name</h3>
+                <p class="text-slate-500 mb-6" id="modalLocation">Location</p>
+                
+                <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 mb-6 flex-grow">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="font-medium text-slate-700">Price per night</span>
+                        <span class="font-bold text-xl text-slate-900" id="modalPrice">0 AURO</span>
+                    </div>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Duration of stay</label>
+                            <div class="flex items-center border border-slate-200 rounded-xl overflow-hidden bg-white">
+                                <button onclick="updateNights(-1)" class="w-12 h-12 flex items-center justify-center hover:bg-slate-50 text-slate-600 transition"><i class="fa-solid fa-minus"></i></button>
+                                <input type="number" id="stayNights" value="1" min="1" readonly class="w-full h-12 text-center font-bold text-slate-900 focus:outline-none bg-transparent">
+                                <button onclick="updateNights(1)" class="w-12 h-12 flex items-center justify-center hover:bg-slate-50 text-slate-600 transition"><i class="fa-solid fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-slate-200 pt-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-slate-500 underline decoration-slate-300">Total rate</span>
+                            <span class="font-medium text-slate-700" id="modalSubtotal">0 AURO</span>
+                        </div>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-slate-500 underline decoration-slate-300">Network fee</span>
+                            <span class="font-medium text-slate-700">~0.001 ETH</span>
+                        </div>
+                        <div class="flex justify-between items-center pt-4 border-t border-slate-200">
+                            <span class="font-bold text-lg text-slate-900">Total Request</span>
+                            <span class="font-bold text-2xl text-brand-500" id="modalTotal">0 AURO</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="btnConfirmBooking" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-4 rounded-xl transition duration-300 flex justify-center items-center gap-2 shadow-lg shadow-brand-500/30">
+                    <i class="fa-solid fa-fingerprint"></i> Sign & Book via Smart Contract
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3"></div>
+
     <script>
-        const navBtns = document.querySelectorAll('.nav-btn');
-        const sections = document.querySelectorAll('.view-section');
+        let currentPricePerNight = 0;
+        
+        const overlay = document.getElementById('bookingModalOverlay');
+        const modal = document.getElementById('bookingModal');
 
-        navBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                navBtns.forEach(b => {
-                    b.classList.remove('active', 'text-neon-400', 'text-accent-400', 'text-blue-400');
-                    b.classList.add('text-slate-400');
-                    b.style.borderBottom = "none";
-                    b.style.textShadow = "none";
-                });
-                
-                const targetId = btn.getAttribute('data-target');
-                let highlightColor = '#c084fc'; // Default neon purple
-                if(targetId === 'play') highlightColor = '#2dd4bf'; // Accent teal
-                if(targetId === 'tokenomics') highlightColor = '#60a5fa'; // Blue
-                
-                btn.classList.add('active');
-                btn.style.color = highlightColor;
-                btn.style.borderBottom = `2px solid ${highlightColor}`;
-                btn.style.textShadow = `0 0 10px ${highlightColor}80`;
-
-                sections.forEach(sec => sec.classList.remove('active'));
-                document.getElementById(targetId).classList.add('active');
-            });
-        });
-
-        window.mockTx = function(item, price) {
-            alert(`--- SMART CONTRACT INTERACTION ---\n\nApprove transaction to spend ${price} NOVA tokens?\n\nIf approved, the ERC-721 contract will mint [ ${item} ] directly to your connected wallet.`);
+        window.openBookingModal = function(title, location, price, imgSrc) {
+            currentPricePerNight = price;
+            
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalTitleMobile').innerText = title;
+            document.getElementById('modalLocation').innerText = location;
+            document.getElementById('modalPrice').innerText = `${price} AURO`;
+            document.getElementById('modalImg').src = imgSrc;
+            
+            document.getElementById('stayNights').value = 1;
+            calculateTotal();
+            
+            overlay.classList.remove('hidden');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                overlay.style.opacity = '1';
+                overlay.classList.add('modal-bg');
+                modal.classList.add('modal-content');
+            }, 10);
         }
 
-        window.simulateMatch = function() {
-            const btn = document.getElementById('playBtn');
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing Match Data...';
-            btn.disabled = true;
-            btn.style.borderColor = '#64748b';
-            btn.style.color = '#64748b';
-
+        window.closeModal = function(event) {
+            if(event && event.target !== overlay) return; 
+            
+            overlay.style.opacity = '0';
             setTimeout(() => {
-                btn.innerHTML = 'Initialize Match';
-                btn.disabled = false;
-                btn.style.borderColor = '#2dd4bf';
-                btn.style.color = '#2dd4bf';
-                
-                alert("⚔️ VICTORY! ⚔️\n\nYour performance triggered the ERC-20 Reward Contract.\n\n+50 NOVA tokens have been minted and deposited into your wallet.");
-            }, 2500);
+                overlay.classList.remove('modal-bg');
+                modal.classList.remove('modal-content');
+                overlay.classList.add('hidden');
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        window.updateNights = function(change) {
+            const input = document.getElementById('stayNights');
+            let current = parseInt(input.value);
+            if(current + change >= 1) {
+                input.value = current + change;
+                calculateTotal();
+            }
+        }
+
+        function calculateTotal() {
+            const nights = parseInt(document.getElementById('stayNights').value);
+            const total = nights * currentPricePerNight;
+            document.getElementById('modalSubtotal').innerText = `${total} AURO`;
+            document.getElementById('modalTotal').innerText = `${total} AURO`;
+        }
+
+        window.showToast = function(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const icon = type === 'success' ? '<i class="fa-solid fa-check-circle text-brand-500"></i>' : '<i class="fa-solid fa-triangle-exclamation text-amber-500"></i>';
+            toast.className = `toast flex items-center gap-3 bg-white border border-slate-100 rounded-xl p-4 shadow-xl min-w-[300px] text-slate-900`;
+            toast.innerHTML = `${icon} <div><h4 class="font-bold text-sm">${type === 'success' ? 'Confirmed' : 'Notice'}</h4><p class="text-xs text-slate-500">${message}</p></div>`;
+            container.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(100%)'; toast.style.transition = 'all 0.3s ease'; setTimeout(() => toast.remove(), 300); }, 4000);
         }
     </script>
 
     <script type="module">
-        import { createThirdwebClient, getContract } from "https://esm.sh/thirdweb";
+        import { createThirdwebClient, getContract, sendTransaction } from "https://esm.sh/thirdweb";
+        import { transfer } from "https://esm.sh/thirdweb/extensions/erc20";
 
-        /* =====================================================================
-           If you write Python, setting up these Web3 connections is just like 
-           defining a dictionary of variables at the top of a script. 
-           Update the strings below with your actual data from the dashboard!
-           =====================================================================
-        */
-
-        // 1. UPDATE THIS: Your Thirdweb Client ID 
-        const client = createThirdwebClient({ 
-            clientId: "<<< UPDATE_THIS_CLIENT_ID >>>" 
-        });
-
-        // 2. UPDATE THIS: Your Game Currency Contract (ERC-20)
-        const gameTokenContract = getContract({
+        // IMPORTANT: Replace these with your actual details!
+        const client = createThirdwebClient({ clientId: "YOUR_CLIENT_ID" });
+        const tokenContract = getContract({
             client,
-            chain: 11155111, // Sepolia ID
-            address: "<<< UPDATE_THIS_ERC20_TOKEN_ADDRESS >>>" 
+            chain: 11155111,
+            address: "YOUR_TOKEN_CONTRACT_ADDRESS" 
         });
 
-        // 3. UPDATE THIS: Your Game Assets Contract (ERC-721 NFT)
-        // (You can leave this blank if you haven't deployed an NFT collection yet!)
-        const gameNftContract = getContract({
-            client,
-            chain: 11155111, 
-            address: "<<< UPDATE_THIS_ERC721_NFT_ADDRESS >>>" 
-        });
+        document.getElementById('btnConfirmBooking').addEventListener('click', async () => {
+            const totalAmount = document.getElementById('modalTotal').innerText.replace(' AURO', '');
+            const dummyHostAddress = "0x000000000000000000000000000000000000dEaD"; // A burn/dummy address for testing
 
+            closeModal(); 
+            window.showToast("Initiating smart contract. Please check your wallet to sign the transaction.", "success");
+
+            try {
+                const transaction = transfer({ 
+                    contract: tokenContract, 
+                    to: dummyHostAddress, 
+                    amount: totalAmount 
+                });
+                
+                // If you had activeAccount set up via a full React context:
+                // await sendTransaction({ transaction, account: activeAccount });
+                // window.showToast(`Booking Confirmed for ${totalAmount} AURO!`, 'success');
+                
+            } catch (error) {
+                console.error(error);
+                window.showToast("Transaction failed or was rejected by user.", "error");
+            }
+        });
     </script>
 </body>
 </html>
