@@ -41,8 +41,16 @@
         .glow-text { text-shadow: 0 0 10px rgba(192, 132, 252, 0.5); }
         .glow-border:hover { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); border-color: #c084fc; transform: translateY(-2px); }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Game Arena Animations */
         .live-indicator { animation: pulse 2s infinite; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        
+        .radar { position: relative; width: 140px; height: 140px; border-radius: 50%; border: 2px solid rgba(45, 212, 191, 0.4); margin: 0 auto 2rem auto; box-shadow: 0 0 30px rgba(45, 212, 191, 0.15); background: rgba(45, 212, 191, 0.05); overflow: hidden;}
+        .radar::after { content: ''; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background: rgba(45, 212, 191, 0.3); }
+        .radar::before { content: ''; position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: rgba(45, 212, 191, 0.3); }
+        .scanner { position: absolute; top: 50%; left: 50%; width: 50%; height: 50%; background: linear-gradient(to right, rgba(45,212,191,0) 0%, rgba(45,212,191,0.8) 100%); transform-origin: 0 0; animation: scan 2s linear infinite; }
+        @keyframes scan { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased bg-dark-950 border-t-4 border-neon-500">
@@ -129,7 +137,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
                     <div class="h-48 relative">
-                        <img src="https://lh3.googleusercontent.com/d/image_18.png" alt="Neon Striker" class="w-full h-full object-cover border-b border-neon-500/30">
+                        <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?auto=format&fit=crop&w=600&q=80" alt="Neon Striker" class="w-full h-full object-cover border-b border-neon-500/30">
                         <div class="absolute top-2 right-2 bg-dark-900 border border-neon-500 text-neon-400 text-xs font-bold px-2 py-1 uppercase rounded shadow-[0_0_10px_rgba(168,85,247,0.5)]">Lv. 12</div>
                     </div>
                     <div class="p-5">
@@ -145,7 +153,7 @@
                 </div>
                 <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
                     <div class="h-48 relative">
-                        <img src="https://lh3.googleusercontent.com/d/image_18.png" alt="Plasma Rifle" class="w-full h-full object-cover border-b border-blue-500/30">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80" alt="Plasma Rifle" class="w-full h-full object-cover border-b border-blue-500/30">
                         <div class="absolute top-2 right-2 bg-dark-900 border border-blue-500 text-blue-400 text-xs font-bold px-2 py-1 uppercase rounded">Epic</div>
                     </div>
                     <div class="p-5">
@@ -153,13 +161,13 @@
                             <h3 class="font-bold text-xl text-white uppercase">Plasma Rifle</h3>
                             <span class="text-xs text-slate-500">#8812</span>
                         </div>
-                        <p class="text-sm text-slate-400 mb-4">Type: Heavy Weapon</p>
+                        <p class="text-sm text-slate-400 mb-4">Type: Energy Weapon</p>
                         <button class="w-full border border-blue-500 text-blue-400 hover:bg-blue-600 hover:text-white font-bold py-2 uppercase tracking-wide transition">Equip Asset</button>
                     </div>
                 </div>
                 <div class="glass-panel rounded-xl overflow-hidden glow-border transition duration-300">
                     <div class="h-48 relative">
-                        <img src="https://lh3.googleusercontent.com/d/image_18.png" alt="Cyber Hound" class="w-full h-full object-cover border-b border-accent-500/30">
+                        <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80" alt="Cyber Hound" class="w-full h-full object-cover border-b border-accent-500/30">
                         <div class="absolute top-2 right-2 bg-dark-900 border border-accent-500 text-accent-400 text-xs font-bold px-2 py-1 uppercase rounded">Rare Pet</div>
                     </div>
                     <div class="p-5">
@@ -179,25 +187,25 @@
             <p class="text-slate-400 mb-8">Acquire rare assets directly from the Smart Contract using $NOVA tokens.</p>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                 <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <img src="https://lh3.googleusercontent.com/d/image_19.png" alt="Energy Shield" class="w-full h-32 object-cover rounded-lg mb-4 border border-neon-500/30">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&q=80" alt="Energy Shield" class="w-full h-32 object-cover rounded-lg mb-4 border border-neon-500/30">
                     <h3 class="font-bold text-white uppercase mb-1">Energy Shield</h3>
                     <p class="text-xl font-bold text-accent-400 mb-4">250 NOVA</p>
                     <button onclick="mockTx('Energy Shield', 250)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
                 </div>
                 <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <img src="https://lh3.googleusercontent.com/d/image_19.png" alt="Genesis Land" class="w-full h-32 object-cover rounded-lg mb-4 border border-amber-500/50">
+                    <img src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?auto=format&fit=crop&w=400&q=80" alt="Genesis Land" class="w-full h-32 object-cover rounded-lg mb-4 border border-amber-500/50">
                     <h3 class="font-bold text-amber-500 uppercase mb-1">Genesis Land</h3>
                     <p class="text-xl font-bold text-accent-400 mb-4">5,000 NOVA</p>
                     <button onclick="mockTx('Genesis Land', 5000)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
                 </div>
                 <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <img src="https://lh3.googleusercontent.com/d/image_19.png" alt="Mystery Box" class="w-full h-32 object-cover rounded-lg mb-4 border border-red-500/50">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=400&q=80" alt="Mystery Box" class="w-full h-32 object-cover rounded-lg mb-4 border border-red-500/50">
                     <h3 class="font-bold text-red-400 uppercase mb-1">Lootbox (ERC-1155)</h3>
                     <p class="text-xl font-bold text-accent-400 mb-4">100 NOVA</p>
                     <button onclick="mockTx('Mystery Box', 100)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
                 </div>
                 <div class="glass-panel rounded-xl p-4 glow-border transition text-center">
-                    <img src="https://lh3.googleusercontent.com/d/image_19.png" alt="Chroma Skin" class="w-full h-32 object-cover rounded-lg mb-4 border border-pink-500/50">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=400&q=80" alt="Chroma Skin" class="w-full h-32 object-cover rounded-lg mb-4 border border-pink-500/50">
                     <h3 class="font-bold text-pink-400 uppercase mb-1">Chroma Skin</h3>
                     <p class="text-xl font-bold text-accent-400 mb-4">800 NOVA</p>
                     <button onclick="mockTx('Chroma Skin', 800)" class="w-full bg-dark-800 border border-accent-500 text-accent-400 hover:bg-accent-500 hover:text-white font-bold py-2 uppercase transition">Purchase</button>
@@ -230,8 +238,6 @@
                 </div>
 
                 <div class="lg:col-span-2 text-center relative overflow-hidden rounded-2xl">
-                    <img src="https://lh3.googleusercontent.com/d/image_20.png" alt="Battle Arena" class="absolute inset-0 w-full h-full object-cover opacity-30 blur-sm z-0">
-                    
                     <div class="relative z-10 p-12">
                         <div class="inline-flex items-center justify-center space-x-2 bg-dark-800 border border-red-500/50 px-4 py-1 rounded-full mb-6">
                             <div class="w-2 h-2 rounded-full bg-red-500 live-indicator"></div>
@@ -240,9 +246,11 @@
                         <h2 class="text-5xl font-black text-white uppercase glow-text mb-4">The Arena</h2>
                         <p class="text-lg text-slate-400 mb-8">Deploy your NFTs into the simulation. Win matches to trigger the Smart Contract and mint $NOVA tokens.</p>
                         
-                        <div class="glass-panel p-12 border-2 border-accent-500 rounded-2xl relative bg-dark-900/50">
-                            <i class="fa-solid fa-crosshairs text-6xl text-slate-700 mb-8"></i><br>
-                            <button onclick="simulateMatch()" id="playBtn" class="bg-dark-800 hover:bg-accent-600 text-accent-400 hover:text-white font-black text-2xl py-6 px-12 rounded-lg border-2 border-accent-500 uppercase tracking-widest shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all">
+                        <div class="glass-panel p-12 border-2 border-accent-500 rounded-2xl relative bg-dark-900/80 overflow-hidden">
+                            <div class="radar">
+                                <div class="scanner"></div>
+                            </div>
+                            <button onclick="simulateMatch()" id="playBtn" class="bg-dark-800 hover:bg-accent-600 text-accent-400 hover:text-white font-black text-2xl py-5 px-10 rounded-lg border-2 border-accent-500 uppercase tracking-widest shadow-[0_0_20px_rgba(45,212,191,0.2)] transition-all">
                                 Initialize Match
                             </button>
                         </div>
@@ -310,7 +318,7 @@
 
         window.simulateMatch = function() {
             const btn = document.getElementById('playBtn');
-            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing Match Data...';
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Processing...';
             btn.disabled = true;
             btn.style.borderColor = '#64748b';
             btn.style.color = '#64748b';
@@ -329,16 +337,19 @@
     <script type="module">
         import { createThirdwebClient, getContract } from "https://esm.sh/thirdweb";
 
+        // 1. UPDATE THIS: Your Thirdweb Client ID 
         const client = createThirdwebClient({ 
             clientId: "<<< UPDATE_THIS_CLIENT_ID >>>" 
         });
 
+        // 2. UPDATE THIS: Your Game Currency Contract (ERC-20)
         const gameTokenContract = getContract({
             client,
             chain: 11155111, // Sepolia ID
             address: "<<< UPDATE_THIS_ERC20_TOKEN_ADDRESS >>>" 
         });
 
+        // 3. UPDATE THIS: Your Game Assets Contract (ERC-721 NFT)
         const gameNftContract = getContract({
             client,
             chain: 11155111, 
