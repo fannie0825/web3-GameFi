@@ -73,7 +73,7 @@
                 </div>
                 
                 <div>
-                    <thirdweb-connect client-id="<<< UPDATE_THIS_CLIENT_ID >>>" theme="dark"></thirdweb-connect>
+                    <thirdweb-connect client-id="483f934e5b882deb7ddd6946b3d81b1c" theme="dark"></thirdweb-connect>
                 </div>
             </div>
         </div>
@@ -339,23 +339,21 @@
     <script type="module">
         import { createThirdwebClient, getContract } from "https://esm.sh/thirdweb";
 
-        // 1. UPDATE THIS: Your Thirdweb Client ID 
+        // YOUR CLIENT ID IS INJECTED HERE
         const client = createThirdwebClient({ 
-            clientId: "<<< UPDATE_THIS_CLIENT_ID >>>" 
+            clientId: "483f934e5b882deb7ddd6946b3d81b1c" 
         });
 
-        // 2. UPDATE THIS: Your Game Currency Contract (ERC-20)
         const gameTokenContract = getContract({
             client,
             chain: 11155111, // Sepolia ID
-            address: "<<< UPDATE_THIS_ERC20_TOKEN_ADDRESS >>>" 
+            address: "0x0000000000000000000000000000000000000000" 
         });
 
-        // 3. UPDATE THIS: Your Game Assets Contract (ERC-721 NFT)
         const gameNftContract = getContract({
             client,
             chain: 11155111, 
-            address: "<<< UPDATE_THIS_ERC721_NFT_ADDRESS >>>" 
+            address: "0x0000000000000000000000000000000000000000" 
         });
 
     </script>
